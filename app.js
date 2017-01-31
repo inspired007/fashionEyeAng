@@ -15,6 +15,8 @@
        this.review = {};
 
         this.addReview = function (product) {
+
+            this.review.createdOn = Date.now();
            product.reviews.push(this.review);
            this.review = {}; //Clear form
         };
@@ -27,6 +29,19 @@
        };
         this.isSet = function(checkTab){
             return this.tab === checkTab;
+        };
+    });
+
+    app.directive('productDescription', function(){
+        return{
+            restrict: 'E',
+            templateUrl: 'product-description.html'
+        };
+    });
+    app.directive('productSpecs', function(){
+        return{
+            restrict: 'A',
+            templateUrl: 'product-specs.html'
         };
     });
 
