@@ -30,80 +30,9 @@
             <em class="pull-right">{{product.price | currency}}</em>
             </h3>
             <!-- Image Gallery -->
-            <div class="gallery" ng-controller="galleryController as gallery" ng-show="product.images.length">
-                <div class="img-wrap">
-                    <img ng-src="{{product.images[gallery.current]}}" alt="image"/>
-                </div>
-                <ul class="img-thumbnail clearfix">
-                    <li class="small-image pull-left thumbnail" ng-repeat="image in product.images">
-                        <img ng-src="{{image}}">
-                    </li>
-                </ul>
-            </div>
-            <section ng-controller="PanelController as panel">
-                <ul class="nav nav-pills">
-                    <li ng-class="{ active:panel.isSet(1)}">
-                        <a href ng-click="panel.selectTab(1)">Description</a>
-                    </li>
-                    <li ng-class="{ active:panel.isSet(2) }">
-                        <a href ng-click="panel.selectTab(2)">Specification</a>
-                    </li>
-                    <li ng-class="{ active:panel.isSet(3) }">
-                        <a href ng-click="panel.selectTab(3)">Reviews</a>
-                    </li>
-                </ul>
-                {{tab}}
-
-            <div class="panel">
-                <product-description ng-show="panel.isSet(1)"></product-description>
-            </div>
-            <div class="panel" ng-show="panel.isSet(2)" product-specs>
-
-
-            </div>
-                <!-- Review Tab's Content -->
-            <div class="panel" ng-show="panel.isSet(3)">
-                <!-- Product Review List -->
-                <ul>
-                <h4>Reviews</h4>
-                    <li ng-repeat="review in product.reviews">
-                        <blockquote>
-                            <b>{{review.stars}} Stars</b>
-                            {{review.body}}
-                            <cite class="clearfix">by: {{review.author}}</cite>
-                        </blockquote>
-                    </li>
-                </ul>
-                <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
-                    <!-- Live Preview -->
-                    <blockquote ng-hide="">
-                        <b>Stars: {{reviewCtrl.review.stars}}</b>
-                        {{reviewCtrl.review.body}}
-                        <cite>by: {{reviewCtrl.review.author}} on {{reviewCtrl.review.createdOn | date: 'M/d/yy h:mm a'}}</cite>
-                    </blockquote>
-
-                    <!-- Review Form -->
-                    <h4>Submit a Review</h4>
-                    <fieldset class="form-group">
-                        <select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars" required>
-                            <option value="">Rate the Product</option>
-                        </select>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <textarea  ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review" required></textarea>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="jimmyDean@example.org" title="Email" required/>
-                    </fieldset>
-                    <fieldset class="form-group">
-
-                        <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
-                    </fieldset>
-                </form>
-
-            </div>
-            <button class="btn btn-default" ng-show="product.canPurchase"> Add to Card</button>
-            </section>
+            <product-gallery></product-gallery>
+            <!--Products Tabs -->
+            <product-tabs></product-tabs>
         </li>
     </ul>
 
